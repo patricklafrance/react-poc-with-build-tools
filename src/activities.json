@@ -1,0 +1,79 @@
+{
+    "items": [
+        {
+            "timestamp": "2017-10-02T18:39:38Z",
+            "eventId": "286fe313-e0c3-41c3-efd2-08d4829c70ae",
+            "activitySubtype": 1,
+            "targetUrl": "https://sharegatedev.sharepoint.com/sites/bestgrouptobedeletedsorrybro/",
+            "siteCollectionUrl": "https://sharegatedev.sharepoint.com/sites/bestgrouptobedeletedsorrybro/",
+            "siteCollectionDisplayName": "Best GROUP TO BE DELETED SORRY BRO",
+            "userPrincipalName": "admin@sharegatedev.onmicrosoft.com",
+            "userEmail": "admin@sharegatedev.onmicrosoft.com",
+            "userDisplayName": "Christian Merat",
+            "extraData": {
+                "o365GroupDisplayName": "Best GROUP TO BE DELETED SORRY BRO",
+                "o365GroupVisibility": 2
+            }
+        },
+        {
+            "timestamp": "2017-10-02T18:35:03Z",
+            "eventId": "e08aa568-d5a1-4a52-a9d3-08d4829bcd18",
+            "activitySubtype": 2,
+            "targetUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/MathySubsiteDeleted/",
+            "siteCollectionUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/",
+            "siteCollectionDisplayName": "mathytest4",
+            "userPrincipalName": "admin@sharegatedev.onmicrosoft.com",
+            "userEmail": "admin@sharegatedev.onmicrosoft.com",
+            "userDisplayName": "Christian Merat",
+            "extraData": {
+                "subsiteDisplayName": "MathySubsiteDeleted"
+            }
+        },
+        {
+            "timestamp": "2017-10-02T18:34:22Z",
+            "eventId": "b52e9780-8aca-4517-308a-08d4829bb49c",
+            "activitySubtype": 2,
+            "targetUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/DocumentLibraryAboutToBeDeletedAsWell/",
+            "siteCollectionUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/",
+            "siteCollectionDisplayName": "mathytest4",
+            "userPrincipalName": "admin@sharegatedev.onmicrosoft.com",
+            "userEmail": "admin@sharegatedev.onmicrosoft.com",
+            "userDisplayName": "Christian Merat",
+            "extraData": {
+                "documentLibraryDisplayName": "DocumentLibraryAboutToBeDeletedAsWell",
+                "targetUserOrGroupName": "arpin.alexandre@gmail.com"
+            }
+        },
+        {
+            "timestamp": "2017-10-02T18:33:36Z",
+            "eventId": "4dead379-8c59-48ef-97a4-08d4829b990d",
+            "activitySubtype": 1,
+            "targetUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/DocumentLibrarySharedNewExternalThatWasDeleted/",
+            "siteCollectionUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/",
+            "siteCollectionDisplayName": "mathytest4",
+            "userPrincipalName": "admin@sharegatedev.onmicrosoft.com",
+            "userEmail": "admin@sharegatedev.onmicrosoft.com",
+            "userDisplayName": "Christian Merat",
+            "extraData": {
+                "documentLibraryDisplayName": "DocumentLibrarySharedNewExternalThatWasDeleted",
+                "targetUserOrGroupName": "alexandre.arpin@gsoft.com"
+            }
+        },
+        {
+            "timestamp": "2017-10-01T18:32:59Z",
+            "eventId": "5d9b585f-e1e7-4087-c598-08d4829b82dd",
+            "activitySubtype": 1,
+            "targetUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/DocumentLibrarySharedNewExternalThatWasDeleted/FeedUser.txt",
+            "siteCollectionUrl": "https://sharegatedev.sharepoint.com/sites/mathytest4/",
+            "siteCollectionDisplayName": "mathytest4",
+            "userPrincipalName": "admin@sharegatedev.onmicrosoft.com",
+            "userEmail": "admin@sharegatedev.onmicrosoft.com",
+            "userDisplayName": "Christian Merat",
+            "extraData": {
+                "documentDisplayName": "FeedUser.txt",
+                "targetUserOrGroupName": "alexandre.arpin@gsoft.com"
+            }
+        }
+    ],
+    "continuationToken": null
+}

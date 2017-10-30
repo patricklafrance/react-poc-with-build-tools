@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "system"
+    },
+    "exclude": [
+      "node_modules",
+      "dist",
+      "semantic"
+    ]
+}

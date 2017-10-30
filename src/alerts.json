@@ -1,0 +1,51 @@
+[
+    {
+        "activityTypeId": "Subsite-Created",
+        "alertSubscriptionId": "b04fdd8f-ac29-4dbd-bfee-bbbc7d54396b",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "kilo@sdoggy-land.com",
+        "userPrincipalName": "kilo@sdoggy-land.com"
+    },
+    {
+        "activityTypeId": "Site-Shared-Externally",
+        "alertSubscriptionId": "88e9e34b-631b-4cec-81a3-beb0b46b5e83",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    },
+    {
+        "activityTypeId": "Document-Library-Shared-Externally",
+        "alertSubscriptionId": "ef13d7da-d7c9-4383-bb8c-34b1eb6c685b",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    },
+    {
+        "activityTypeId": "Folder-Shared-Externally",
+        "alertSubscriptionId": "cb720669-03d9-4d9a-967d-95626c273eae",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    },
+    {
+        "activityTypeId": "Document-Shared-Externally",
+        "alertSubscriptionId": "10623e21-1315-43b7-9a4a-87d68380fed0",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    },
+    {
+        "activityTypeId": "OneDrive-Folder-Shared-Externally",
+        "alertSubscriptionId": "7a2e6c4a-f303-426d-8539-abe1ab575a75",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    },
+    {
+        "activityTypeId": "OneDrive-Document-Shared-Externally",
+        "alertSubscriptionId": "34d114c3-70cb-4b67-bdab-4f0c6e9b2813",
+        "tenantId": "69feac3b-980a-4103-a0fb-39e39768bbc0",
+        "recipientEmail": "admin@sharegatedev.onmicrosoft.com",
+        "userPrincipalName": "admin@sharegatedev.onmicrosoft.com"
+    }
+]

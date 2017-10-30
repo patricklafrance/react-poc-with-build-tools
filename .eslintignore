@@ -1,0 +1,5 @@
+node_modules*/**/*.js
+semantic/**/*.js
+dist/**/*.js
+gulpfile.js
+package.json

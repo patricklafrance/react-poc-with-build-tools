@@ -47,8 +47,8 @@ li, ul {
  Sidebar
 *******************************/
 .sidebar {
-    /* background-color: #40434f; */
-    background-color: red;
+    background-color: #40434f;
+    /* background-color: red; */
     height: 100%;
 }
 .sidebar__logo {

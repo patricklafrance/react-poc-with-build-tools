@@ -34,6 +34,8 @@ class Alert extends PureComponent {
     render() {
         const { alert } = this.props;
 
+        console.log(this.props);
+
         return (
             <li className={classNames({ "alert--is-active": alert.isSubscribed })}>
                 <h3>{alert.activityTypeId}</h3>
@@ -46,10 +48,10 @@ class Alert extends PureComponent {
 };
 
 const mapDispatchToProps = dispatch => {
-    // Turns an object whose values are action creators, into an object with the same keys, 
+    // Turns an object whose values are action creators, into an object with the same keys,
     // but with every action creator wrapped into a dispatch call so they may be invoked directly.
 
-    // The idea is that by pre-binding the action creators, the component you pass to connect() 
+    // The idea is that by pre-binding the action creators, the component you pass to connect()
     // technically "doesn't know" that it's connected - it just knows that it needs to run this.props.someCallback().
     // On the other hand, if you didn't bind action creators, and called this.props.dispatch(someActionCreator()), now the
     // component "knows" that it's connected because it's expecting props.dispatch to exist.

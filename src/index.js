@@ -3,6 +3,8 @@
 // NOTE: OV React documentation: https://gsoftdev.atlassian.net/wiki/spaces/OV/pages/49446996/React
 // NOTE: Understand React lifecycle: https://medium.com/@baphemot/understanding-reactjs-component-life-cycle-823a640b3e8d
 
+// NOTE: Reacr HMR setup instructions: https://gaearon.github.io/react-hot-loader/getstarted/
+
 // WHY REDUX?
 // - Developer experience
 //   - Sans redux, le hot module replacement ne fonctionne pas. Si un module (par exemple un Component) contient de l'état, il ne peut pas être hot replace.
@@ -29,12 +31,10 @@ import { AppContainer } from "react-hot-loader";
 import { ConnectedRouter } from "connected-react-router";
 import { Provider } from "react-redux";
 import React from "react";
-import ReactDOM from "react-dom";
 import { configureStore } from "./store";
 import createHistory from "history/createBrowserHistory";
+import { render } from "react-dom";
 
-// eslint-disable-next-line
-const container = $("[data-app-container]")[0];
 const history = createHistory();
 const store = configureStore(history);
 
@@ -42,8 +42,8 @@ history.listen(location => {
     console.log(`Tracking location changed to: ${location.pathname}`);
 });
 
-const render = (Component) => {
-    return ReactDOM.render(
+const renderForReal = (Component) => {
+    return render(
         <AppContainer>
             <Provider store={store}>
                 <ConnectedRouter history={history}>
@@ -51,11 +51,24 @@ const render = (Component) => {
                 </ConnectedRouter>
             </Provider>
         </AppContainer>,
-        container
+        // eslint-disable-next-line
+        $("[data-app-container]")[0]
     );
 };
 
-render(App);
+// const renderForReal = (Component) => {
+//     return render(
+//         <Provider store={store}>
+//             <ConnectedRouter history={history}>
+//                 <Component />
+//             </ConnectedRouter>
+//         </Provider>,
+//         // eslint-disable-next-line
+//         $("[data-app-container]")[0]
+//     );
+// };
+
+renderForReal(App);
 
 // if (module.hot) {
 //     module.hot.accept("./app", () => { render(App) });
@@ -64,6 +77,6 @@ render(App);
 if (module.hot) {
     module.hot.accept("./app", () => {
         const NextApp = require("./app").default;
-        render(NextApp);
+        renderForReal(NextApp);
     });
 }

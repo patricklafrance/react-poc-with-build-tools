@@ -91,11 +91,11 @@ module.exports = {
                     {
                         test: /\.js$/,
                         include: appRoot,
-                        loader: require.resolve("babel-loader"),
-                        options: {
-                            // Caching babel output optimize build time by 200%.
-                            cacheDirectory: true
-                        }
+                        use: [
+                            require.resolve("react-hot-loader/webpack"),
+                            // NOTE: The HMR is not stable right now if we add caching for the cacheDirectory options for the babel-loader.
+                            require.resolve("babel-loader")
+                        ]
                     },
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
                     // "style" loader turns CSS into JS modules that inject <style> tags.

@@ -1,54 +1,68 @@
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
-import _ from "lodash";
 
 export class Toggle extends Component {
     static propTypes = {
-        isChecked: PropTypes.bool.isRequired,
+        value: PropTypes.bool.isRequired,
         name: PropTypes.string,
         onChanged: PropTypes.func.isRequired
     };
 
     static defaultProps = {
-        isChecked: false,
+        value: false,
         name: "toggle"
     };
 
+    timestamp = Date.now();
+
     _toggleElement = null;
 
-    // componentDidMount() {
-    //     this._toggleElement.checkbox();
-    // }
+    componentDidMount() {
+        this._toggleElement.checkbox();
+    }
 
     componentWillUnmount() {
-        if (!_.isNil(this._toggleElement)) {
-            this._toggleElement.checkbox("destroy");
-        }
+        this._toggleElement.checkbox("destroy");
     }
 
     handleChange = event => {
+        // console.log(event);
+        // console.log(this.props);
+
+
         const { onChanged } = this.props;
 
         onChanged(!this.props.value);
     };
 
-    handleToggleRef = element => {
+    // handleToggleRef = element => {
+    //     console.log(element);
+
+    //     // eslint-disable-next-line
+    //     this._toggleElement = $(element);
+    // };
+
+    handleToggleRef(element) {
         // eslint-disable-next-line
         this._toggleElement = $(element);
-        this._toggleElement.checkbox();
     };
 
     render() {
-        const { name, isChecked } = this.props;
+        console.log("Toggle", this.props);
+
+        // console.log("Render");
+
+        const { name, value } = this.props;
 
         return (
             <div className="ui toggle checkbox">
                 <input type="checkbox"
                        name={name}
-                       defaultChecked={isChecked}
+                       defaultChecked={value}
                        onChange={this.handleChange}
-                       ref={this.handleToggleRef} />
+                       // Cannot use an arrow function because of the following issue: https://github.com/gaearon/react-hot-loader/issues/537
+                       ref={this.handleToggleRef.bind(this)} />
                 <label></label>
             </div>
         )

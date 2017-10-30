@@ -1,7 +1,7 @@
 const env = require("../env");
 
 const plugins = [
-    require.resolve("react-hot-loader/babel"),
+    // require.resolve("react-hot-loader/babel"),
     require.resolve("babel-plugin-transform-object-rest-spread"),
     require.resolve("babel-plugin-transform-class-properties")
 ];

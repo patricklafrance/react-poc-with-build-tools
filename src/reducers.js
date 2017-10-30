@@ -30,6 +30,10 @@ const handleFetchActivitiesFailed = (state, action) => {
         isLoading: false,
         errorMessage: action.errorMessage
     };
+
+    // return {
+    //     ...state
+    // };
 };
 
 const activityFeedRootReducer = (state = ActivityFeedDefaultState, action) => {
@@ -74,8 +78,8 @@ const handleFetchAlertsFailed = (state, action) => {
 const handleSubscribeToAlert = (state, action) => {
     return {
         ...state,
-        alerts: state.alerts.map(x => x.activityTypeId === action.activityTypeId 
-            ? { ...x, isSubscribed: true } 
+        alerts: state.alerts.map(x => x.activityTypeId === action.activityTypeId
+            ? { ...x, isSubscribed: true }
             : x)
     };
 };
@@ -83,8 +87,8 @@ const handleSubscribeToAlert = (state, action) => {
 const handleUnsubscribeFromAlert = (state, action) => {
     return {
         ...state,
-        alerts: state.alerts.map(x => x.activityTypeId === action.activityTypeId 
-            ? { ...x, isSubscribed: false } 
+        alerts: state.alerts.map(x => x.activityTypeId === action.activityTypeId
+            ? { ...x, isSubscribed: false }
             : x)
     };
 };
@@ -115,7 +119,7 @@ const GithubRepositoriesDefaultState = {
 };
 
 const handleFetchRepositoriesRequest = (state, action) => {
-    return { 
+    return {
         ...state,
         isLoading: true
      };
@@ -186,7 +190,7 @@ const notificationsRootReducer = (state = NotificationsDefaultState, action) => 
 /*******************************
  Export
 *******************************/
-export const reducers = {
+export default {
     feed: activityFeedRootReducer,
     alerts: alertsConfigurationRootReducer,
     repositories: githubRepositoriesRootReducer,

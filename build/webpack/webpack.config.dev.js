@@ -19,6 +19,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
+
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
@@ -107,6 +108,31 @@ module.exports = {
                                 options: {
                                     importLoaders: 1
                                 }
+                            }
+                        ]
+                    },
+                    {
+                        test: /\.scss$/,
+                        use: [
+                            {
+                                loader: "style-loader", // creates style nodes from JS strings
+                                options: {
+                                    sourceMap: true
+                                }
+                            },
+                            {
+                                loader: "css-loader", // translates CSS into CommonJS,
+                                options: {
+                                    modules: true,
+                                    importLoaders: 1,
+                                    localIdentName :"[path]___[name]__[local]___[hash:base64:5]"
+                                }
+                            },
+                            {
+                                loader: "resolve-url-loader" // Resolve asset URLs in CSS files
+                            },
+                            {
+                                loader: "sass-loader" // compiles Sass to CSS
                             }
                         ]
                     },

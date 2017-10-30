@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
 import logo from "./logo-sgo.svg";
+import styles from "sidebar.scss";
 
 const Sidebar = () => (
-    <div className="sidebar">
+    <div className={styles.wrapper}>
         <div>
-            <img src={logo} className="sidebar__logo" alt="Logo" />
+            <img src={logo} className={styles.logo} alt="Logo" />
         </div>
         <ul>
             <li className="sidebar__menu-item">

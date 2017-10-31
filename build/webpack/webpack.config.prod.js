@@ -1,5 +1,4 @@
 // TODO: Optimize images
-// TODO: Autoprefixer
 
 const path = require("path");
 
@@ -72,6 +71,7 @@ module.exports = {
                         }
                     },
                     // The notation here is somewhat confusing.
+                    // "sass" loader compile Sass to CSS.
                     // "postcss" loader applies autoprefixer to our CSS.
                     // "css" loader resolves paths in CSS and adds assets as dependencies.
                     // "style" loader normally turns CSS into JS modules injecting <style>,

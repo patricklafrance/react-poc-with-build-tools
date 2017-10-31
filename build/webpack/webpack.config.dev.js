@@ -88,18 +88,22 @@ module.exports = {
                             require.resolve("babel-loader")
                         ]
                     },
+                    // "sass" loader compile Sass to CSS.
+                    // "postcss" loader applies autoprefixer to our CSS.
+                    // "css" loader resolves paths in CSS and adds assets as dependencies.
+                    // "style" loader turns CSS into JS modules that inject <style> tags.
+                    // In production, we use a plugin to extract that CSS to a file, but
+                    // in development "style" loader enables hot editing of CSS.
                     {
                         test: /\.scss$/,
                         use: [
                             {
-                                // Turns CSS into JS modules injecting <style>.
                                 loader: "style-loader",
                                 options: {
                                     sourceMap: true
                                 }
                             },
                             {
-                                // Resolves paths in CSS and adds assets as dependencies.
                                 loader: "css-loader",
                                 options: {
                                     modules: true,
@@ -122,7 +126,6 @@ module.exports = {
                                 }
                             },
                             {
-                                // Compiles SASS to CSS.
                                 loader: "sass-loader"
                             }
                         ]

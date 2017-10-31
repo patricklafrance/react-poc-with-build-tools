@@ -18,7 +18,6 @@
 // TODO: Maybe we can avoid scripts/dev.js and webpack.dev-server.config.js and only configure webpack.config.dev.js.
 
 const path = require("path");
-const webpack = require("webpack");
 
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -46,20 +45,7 @@ const outputRoot = path.resolve(paths.root, paths.outputRoot);
 /////////////////////////////////////
 
 module.exports = {
-    entry: [
-            // React hot loader preserve the state of our components that use redux.
-            require.resolve("react-hot-loader/patch"),
-            // Include an alternative client for WebpackDevServer. A client's job is to
-            // connect to WebpackDevServer by a socket and get notified about changes.
-            // When you save a file, the client will either apply hot updates (in case
-            // of CSS changes), or refresh the page (in case of JS changes). When you
-            // make a syntax error, this client will display a syntax error overlay.
-            require.resolve("react-dev-utils/webpackHotDevClient"),
-            // We include the app code last so that if there is a runtime error during
-            // initialization, it doesn't blow up the WebpackDevServer client, and
-            // changing JS code would still trigger a refresh.
-            appRoot
-    ],
+    entry: appRoot,
     output: {
         path: outputRoot,
         filename: "[name].bundle.js",
@@ -78,7 +64,6 @@ module.exports = {
             new ModuleScopePlugin(appRoot, [nodeRoot])
         ]
     },
-    devtool: "cheap-module-source-map",
     module: {
         strictExportPresence: true,
         rules: [
@@ -91,25 +76,22 @@ module.exports = {
                     {
                         test: /\.js$/,
                         include: appRoot,
-                        use: [
-                            require.resolve("react-hot-loader/webpack"),
-                            // The HMR is not stable right now if we add caching with the cacheDirectory options of the babel-loader.
-                            require.resolve("babel-loader")
-                        ]
+                        loader: require.resolve("babel-loader"),
+                        options: {
+                            compact: true
+                        }
                     },
                     {
                         test: /\.scss$/,
                         use: [
                             {
-                                // Creates style nodes from JS strings
-                                loader: "style-loader",
+                                loader: "style-loader", // creates style nodes from JS strings
                                 options: {
                                     sourceMap: true
                                 }
                             },
                             {
-                                // Translates CSS files into CommonJS that can be imported in component,
-                                loader: "css-loader",
+                                loader: "css-loader", // translates CSS into CommonJS,
                                 options: {
                                     modules: true,
                                     importLoaders: 1,
@@ -118,8 +100,7 @@ module.exports = {
                                 }
                             },
                             {
-                                // Compiles SASS to CSS.
-                                loader: "sass-loader"
+                                loader: "sass-loader" // compiles Sass to CSS
                             }
                         ]
                     },
@@ -152,10 +133,6 @@ module.exports = {
             inject: true,
             template: appIndex,
         }),
-        // Add module names to factory functions so they appear in browser profiler.
-        new webpack.NamedModulesPlugin(),
-        // This is necessary to emit hot updates.
-        new webpack.HotModuleReplacementPlugin(),
         // Watcher doesn't work well if you mistype casing in a path so we use
         // a plugin that prints an error when you attempt to do this.
         new CaseSensitivePathsPlugin(),

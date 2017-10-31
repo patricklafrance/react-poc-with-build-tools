@@ -1,14 +1,14 @@
 const path = require("path");
 const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
 // const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
-const { prepareUrls } = require("react-dev-utils/WebpackDevServerUtils");
+// const { prepareUrls } = require("react-dev-utils/WebpackDevServerUtils");
 
 const { devServerConfig, paths } = require("../config");
 
 /////////////////////////////////////
 
 module.exports = port => {
-    const urls = prepareUrls(devServerConfig.https ? "https" : "http" , devServerConfig.host, devServerConfig.port);
+    // const urls = prepareUrls(devServerConfig.https ? "https" : "http" , devServerConfig.host, devServerConfig.port);
 
     return {
         // Enable gzip compression of generated files.
@@ -39,12 +39,10 @@ module.exports = port => {
         // in the Webpack development configuration. Note that only changes
         // to CSS are currently hot reloaded. JS changes will refresh the browser.
         hot: true,
+        // hotOnly: true,
         // It is important to tell WebpackDevServer to use the same "root" path
         // as we specified in the config. In development, we always serve from /.
         publicPath: devServerConfig.publicPath,
-        // WebpackDevServer is noisy by default so we emit custom message instead
-        // by listening to the compiler events with `compiler.plugin` calls above.
-        quiet: true,
         // Reportedly, this avoids CPU overload on some systems.
         watchOptions: {
             ignored: /node_modules/,
@@ -56,18 +54,18 @@ module.exports = port => {
         historyApiFallback: {
             // Paths with dots should still use the history fallback.
             disableDotRule: true
-        },
-        public: urls.lanUrlForConfig,
-        // NOTE: setup is deprecated, it should be renamed to "before".
-        setup(app) {
-            // This lets us open files from the runtime error overlay.
-            app.use(errorOverlayMiddleware());
-            // This service worker file is effectively a 'no-op' that will reset any
-            // previous service worker registered for the same host:port combination.
-            // We do this in development to avoid hitting the production cache if
-            // it used the same host and port.
-            // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
-            // app.use(noopServiceWorkerMiddleware());
         }
+        // public: urls.lanUrlForConfig,
+        // NOTE: setup is deprecated, it should be renamed to "before".
+        // setup(app) {
+        //     // This lets us open files from the runtime error overlay.
+        //     app.use(errorOverlayMiddleware());
+        //     // This service worker file is effectively a 'no-op' that will reset any
+        //     // previous service worker registered for the same host:port combination.
+        //     // We do this in development to avoid hitting the production cache if
+        //     // it used the same host and port.
+        //     // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
+        //     // app.use(noopServiceWorkerMiddleware());
+        // }
     };
 };

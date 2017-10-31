@@ -25,7 +25,7 @@ const paths = {
 /////////////////////////////////////
 
 const devServerConfig = {
-    defaultPort: 3000,
+    defaultPort: 3001,
     host: "0.0.0.0",
     https: false,
     open: true,

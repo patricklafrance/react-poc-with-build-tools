@@ -53,9 +53,7 @@
   },
   "scripts": {
     "dev": "node build/scripts/dev.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "sgo": "gulp default"
+    "prod": "node build/scripts/prod.js"
   },
   "devDependencies": {
     "babel-polyfill": "6.26.0",

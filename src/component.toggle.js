@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
+import styles from "./app.scss";
 
 export class Toggle extends Component {
     static propTypes = {

@@ -19,6 +19,18 @@ if (env.isDevelopment) {
 }
 
 module.exports = {
-    presets: [require.resolve("babel-preset-react") ],
+    presets: [
+        [
+            // For preset-env documentation see: https://github.com/babel/babel/tree/master/experimental/babel-preset-env.
+            require.resolve("babel-preset-env"),
+            {
+                targets: {
+                    ie: 11
+                },
+                modules: false,
+            }
+        ],
+        require.resolve("babel-preset-react")
+    ],
     plugins: plugins
 };

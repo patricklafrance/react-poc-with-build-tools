@@ -47,23 +47,24 @@ const outputRoot = path.resolve(paths.root, paths.outputRoot);
 
 module.exports = {
     entry: [
-            // React hot loader preserve the state of our components that use redux.
-            require.resolve("react-hot-loader/patch"),
-            // Include an alternative client for WebpackDevServer. A client's job is to
-            // connect to WebpackDevServer by a socket and get notified about changes.
-            // When you save a file, the client will either apply hot updates (in case
-            // of CSS changes), or refresh the page (in case of JS changes). When you
-            // make a syntax error, this client will display a syntax error overlay.
-            require.resolve("react-dev-utils/webpackHotDevClient"),
-            // We include the app code last so that if there is a runtime error during
-            // initialization, it doesn't blow up the WebpackDevServer client, and
-            // changing JS code would still trigger a refresh.
-            appRoot
+        require.resolve("babel-polyfill"),
+        // React hot loader preserve the state of our components that use redux.
+        require.resolve("react-hot-loader/patch"),
+        // Include an alternative client for WebpackDevServer. A client's job is to
+        // connect to WebpackDevServer by a socket and get notified about changes.
+        // When you save a file, the client will either apply hot updates (in case
+        // of CSS changes), or refresh the page (in case of JS changes). When you
+        // make a syntax error, this client will display a syntax error overlay.
+        require.resolve("react-dev-utils/webpackHotDevClient"),
+        // We include the app code last so that if there is a runtime error during
+        // initialization, it doesn't blow up the WebpackDevServer client, and
+        // changing JS code would still trigger a refresh.
+        appRoot
     ],
     output: {
         path: outputRoot,
-        filename: "[name].bundle.js",
-        chunkFilename: "[name].chunk.js",
+        filename: `${paths.staticFilesPath}js/[name].bundle.js`,
+        chunkFilename: `${paths.staticFilesPath}js/[name].chunk.js`,
         publicPath: publicPath,
     },
     resolve: {
@@ -101,14 +102,14 @@ module.exports = {
                         test: /\.scss$/,
                         use: [
                             {
-                                // Creates style nodes from JS strings
+                                // Turns CSS into JS modules injecting <style>,
                                 loader: "style-loader",
                                 options: {
                                     sourceMap: true
                                 }
                             },
                             {
-                                // Translates CSS files into CommonJS that can be imported in component,
+                                // Translates CSS files into CommonJS that can be imported in component.
                                 loader: "css-loader",
                                 options: {
                                     modules: true,
@@ -134,7 +135,7 @@ module.exports = {
                         exclude: [/\.js$/, /\.html$/, /\.json$/],
                         loader: require.resolve("file-loader"),
                         options: {
-                            name: "assets/[name].[ext]"
+                            name: `${paths.staticFilesPath}/img/[name].[ext]`
                         }
                     }
                 ]

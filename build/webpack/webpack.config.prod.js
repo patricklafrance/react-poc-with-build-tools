@@ -1,29 +1,15 @@
-// TODO:
-// SASS
-// Semantic UI
-// Linters (ESLint, stylelint, jsx ally)
-// Babel
-// Images (+ optimization)
-// Text replacement in files
-// Copy assets
-
-// HMR (Missing for React code)
-// Tests
-// Compile semantic UI
-
-// NOTE: Good documentation about HMR setup: https://gaearon.github.io/react-hot-loader/getstarted/
-
-// Maybe solution for webpack + gulp for semantic: https://github.com/Browsersync/recipes/tree/master/recipes/webpack.react-hot-loader
-
-// TODO: Maybe we can avoid scripts/dev.js and webpack.dev-server.config.js and only configure webpack.config.dev.js.
+// TODO: Minify CSS
+// TODO: Optimize images
+// TODO: Merge configs
+// TODO: Autoprefixer
 
 const path = require("path");
 
+const webpack = require("webpack");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
-const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const { paths, devServerConfig } = require("../config");
 
@@ -45,11 +31,16 @@ const outputRoot = path.resolve(paths.root, paths.outputRoot);
 /////////////////////////////////////
 
 module.exports = {
-    entry: appRoot,
+    // Don't attempt to continue if there are any errors.
+    bail: true,
+    entry: [
+        require.resolve("babel-polyfill"),
+        appRoot
+    ],
     output: {
         path: outputRoot,
-        filename: "[name].bundle.js",
-        chunkFilename: "[name].chunk.js",
+        filename: `${paths.staticFilesPath}js/[name].bundle.js`,
+        chunkFilename: `${paths.staticFilesPath}js/[name].chunk.js`,
         publicPath: publicPath,
     },
     resolve: {
@@ -81,28 +72,68 @@ module.exports = {
                             compact: true
                         }
                     },
+                    // The notation here is somewhat confusing.
+                    // "postcss" loader applies autoprefixer to our CSS.
+                    // "css" loader resolves paths in CSS and adds assets as dependencies.
+                    // "style" loader normally turns CSS into JS modules injecting <style>,
+                    // but unlike in development configuration, we do something different.
+                    // `ExtractTextPlugin` first applies the "postcss" and "css" loaders
+                    // (second argument), then grabs the result CSS and puts it into a
+                    // separate file in our build process. This way we actually ship
+                    // a single CSS file in production instead of JS code injecting <style>
+                    // tags. If you use code splitting, however, any async bundles will still
+                    // use the "style" loader inside the async code so CSS from them won't be
+                    // in the main CSS file.
                     {
                         test: /\.scss$/,
-                        use: [
-                            {
-                                loader: "style-loader", // creates style nodes from JS strings
-                                options: {
-                                    sourceMap: true
+                        loader: ExtractTextPlugin.extract({
+                            fallback: require.resolve("style-loader"),
+                            use: [
+                                {
+                                    // Resolves paths in CSS and adds assets as dependencies.
+                                    loader: "css-loader",
+                                    options: {
+                                        modules: true,
+                                        importLoaders: 1,
+                                        localIdentName :"[path]___[name]__[local]",
+                                        camelCase: "dashesOnly",
+                                        minimize: true
+                                    }
+                                },
+                                {
+                                    // Compiles SASS to CSS.
+                                    loader: "sass-loader"
                                 }
-                            },
-                            {
-                                loader: "css-loader", // translates CSS into CommonJS,
-                                options: {
-                                    modules: true,
-                                    importLoaders: 1,
-                                    localIdentName :"[path]___[name]__[local]",
-                                    camelCase: "dashesOnly"
-                                }
-                            },
-                            {
-                                loader: "sass-loader" // compiles Sass to CSS
-                            }
-                        ]
+                            ]
+                        })
+                        // loader: ExtractTextPlugin.extract(
+                        //     Object.assign({
+
+                        //     }, )
+                        //     {
+                        //         // Turns CSS into JS modules injecting <style>.
+                        //         loader: "style-loader",
+                        //         options: {
+                        //             sourceMap: true
+                        //         }
+                        //     },
+                        //     {
+                        //         // Resolves paths in CSS and adds assets as dependencies.
+                        //         loader: "css-loader",
+                        //         options: {
+                        //             modules: true,
+                        //             importLoaders: 1,
+                        //             localIdentName :"[path]___[name]__[local]",
+                        //             camelCase: "dashesOnly",
+                        //             minimize: true
+                        //         }
+                        //     },
+                        //     {
+                        //         // Compiles SASS to CSS.
+                        //         loader: "sass-loader"
+                        //     },
+                        //     {})
+                        // )
                     },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // This loader doesn't use a "test" so it will catch all modules
@@ -115,7 +146,7 @@ module.exports = {
                         exclude: [/\.js$/, /\.html$/, /\.json$/],
                         loader: require.resolve("file-loader"),
                         options: {
-                            name: "assets/[name].[ext]"
+                            name: `${paths.staticFilesPath}/img/[name].[ext]`
                         }
                     }
                 ]
@@ -132,14 +163,48 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: appIndex,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              }
         }),
-        // Watcher doesn't work well if you mistype casing in a path so we use
-        // a plugin that prints an error when you attempt to do this.
-        new CaseSensitivePathsPlugin(),
-        // If you require a missing module and then `npm install` it, you still have
-        // to restart the development server for Webpack to discover it. This plugin
-        // makes the discovery automatic so you don't have to restart.
-        // See https://github.com/facebookincubator/create-react-app/issues/186
-        new WatchMissingNodeModulesPlugin(nodeRoot)
+        // It is absolutely essential that NODE_ENV was set to production here.
+        // Otherwise React will be compiled in the very slow development mode.
+        new webpack.DefinePlugin({
+            "ENV": JSON.stringify("production"),
+            "DEBUG": false,
+            "process.env":{
+              "NODE_ENV": JSON.stringify("production")
+            }
+        }),
+        // Minify the code.
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                // Disabled because of an issue with Uglify breaking seemingly valid code:
+                // https://github.com/facebookincubator/create-react-app/issues/2376
+                // Pending further investigation:
+                // https://github.com/mishoo/UglifyJS2/issues/2011
+                comparisons: false
+            },
+            output: {
+                comments: false,
+                // Turned on because emoji and regex is not minified properly using default
+                // https://github.com/facebookincubator/create-react-app/issues/2488
+                ascii_only: true
+            }
+        }),
+        // Extract the CSS into a file.
+        new ExtractTextPlugin({
+            filename: `${paths.staticFilesPath}/css/[name].css`,
+        })
     ]
 };

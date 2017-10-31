@@ -5,8 +5,8 @@ process.env.NODE_ENV = "production";
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-process.on("unhandledRejection", err => {
-    throw err;
+process.on("unhandledRejection", error => {
+    throw error;
 });
 
 /////////////////////////////////////
@@ -27,15 +27,15 @@ const outputRoot = path.resolve(paths.root, paths.outputRoot);
 /////////////////////////////////////
 
 function cleanOutputDirectory() {
-    console.log(chalk.cyan("Cleaning the output directory..."));
+    console.log("Cleaning the output directory...");
 
     fs.emptyDirSync(outputRoot);
 
-    console.log(chalk.cyan("Ouput directory cleaned."));
+    console.log("Ouput directory cleaned.");
 }
 
 function buildApp() {
-    console.log(chalk.cyan("Compiling application..."));
+    console.log("Compiling application...");
 
     const compiler = webpack(webpackConfig);
 
@@ -54,7 +54,7 @@ function buildApp() {
                 return reject();
             }
 
-            console.log(chalk.cyan("Application compiled."));
+            console.log("Application compiled.");
 
             resolve();
         });
@@ -62,14 +62,14 @@ function buildApp() {
 }
 
 function copyPublicFolder() {
-    console.log(chalk.cyan("Copying the public folder..."));
+    console.log("Copying the public folder...");
 
     fs.copySync(publicRoot, outputRoot, {
         dereference: true,
         filter: file => file !== appIndex
     });
 
-    console.log(chalk.cyan("Public folder copied."));
+    console.log("Public folder copied.");
 }
 
 /////////////////////////////////////
@@ -80,7 +80,7 @@ buildApp()
     .then(() => {
         copyPublicFolder();
 
-        chalk.green("\n\nProduction bundled created successfully!\n\n");
+        console.log(chalk.green("\nProduction bundled created successfully!\n"));
     })
     .catch(() => {
         process.exit(1);

@@ -19,7 +19,8 @@ const paths = {
     publicRoot,
     buildRoot,
     semanticRoot,
-    outputRoot
+    outputRoot,
+    staticFilesPath: "static/"
 };
 
 /////////////////////////////////////

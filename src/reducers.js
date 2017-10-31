@@ -30,10 +30,6 @@ const handleFetchActivitiesFailed = (state, action) => {
         isLoading: false,
         errorMessage: action.errorMessage
     };
-
-    // return {
-    //     ...state
-    // };
 };
 
 const activityFeedRootReducer = (state = ActivityFeedDefaultState, action) => {

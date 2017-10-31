@@ -3,7 +3,8 @@
 // NOTE: OV React documentation: https://gsoftdev.atlassian.net/wiki/spaces/OV/pages/49446996/React
 // NOTE: Understand React lifecycle: https://medium.com/@baphemot/understanding-reactjs-component-life-cycle-823a640b3e8d
 
-// NOTE: Reacr HMR setup instructions: https://gaearon.github.io/react-hot-loader/getstarted/
+// NOTE: React HMR setup instructions: https://gaearon.github.io/react-hot-loader/getstarted/
+// NOTE: Setup Gulp + Webpack: https://medium.com/points-san-francisco/what-i-wish-i-knew-6-days-ago-9f27c6c6ba02
 
 // WHY REDUX?
 // - Developer experience
@@ -56,23 +57,7 @@ const renderForReal = (Component) => {
     );
 };
 
-// const renderForReal = (Component) => {
-//     return render(
-//         <Provider store={store}>
-//             <ConnectedRouter history={history}>
-//                 <Component />
-//             </ConnectedRouter>
-//         </Provider>,
-//         // eslint-disable-next-line
-//         $("[data-app-container]")[0]
-//     );
-// };
-
 renderForReal(App);
-
-// if (module.hot) {
-//     module.hot.accept("./app", () => { render(App) });
-// }
 
 if (module.hot) {
     module.hot.accept("./app", () => {

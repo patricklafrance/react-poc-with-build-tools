@@ -1,4 +1,4 @@
-// TOD: npm run build -> not good.
+// TODO: npm run build -> not good.
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = "development";
@@ -20,7 +20,7 @@ const { choosePort, createCompiler, prepareUrls } = require("react-dev-utils/Web
 const openBrowser = require("react-dev-utils/openBrowser");
 
 const { devServerConfig } = require("../config");
-const webpackConfig = require("../webpack/webpack.config.dev");
+const webpackConfig = require("../webpack/webpack.config.dev")();
 const createWebpackDevServerConfig = require("../webpack/webpack.dev-server.config");
 const packageJson = require("../../package.json");
 

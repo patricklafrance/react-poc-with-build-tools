@@ -10,13 +10,9 @@ import { createLogger } from "redux-logger";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
 
-// import reducers from "./reducers";
-
-
 export function configureStore(history) {
     const rootReducer = connectRouter(history)(combineReducers(reducers));
 
-    // const enhancers = composeWithDevTools(applyMiddleware(thunk, createLogger(), routerMiddleware(history)));
     const enhancers = composeWithDevTools(applyMiddleware(thunk, routerMiddleware(history)));
     const store = createStore(rootReducer, enhancers);
 

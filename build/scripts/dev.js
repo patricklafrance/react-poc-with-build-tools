@@ -20,7 +20,7 @@ const { choosePort, createCompiler, prepareUrls } = require("react-dev-utils/Web
 const openBrowser = require("react-dev-utils/openBrowser");
 
 const { devServerConfig } = require("../config");
-const webpackConfig = require("../webpack/webpack.config.dev")();
+const webpackConfig = require("../webpack/webpack.config.dev");
 const createWebpackDevServerConfig = require("../webpack/webpack.dev-server.config");
 const packageJson = require("../../package.json");
 

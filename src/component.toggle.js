@@ -27,21 +27,10 @@ export class Toggle extends Component {
     }
 
     handleChange = event => {
-        // console.log(event);
-        // console.log(this.props);
-
-
         const { onChanged } = this.props;
 
         onChanged(!this.props.value);
     };
-
-    // handleToggleRef = element => {
-    //     console.log(element);
-
-    //     // eslint-disable-next-line
-    //     this._toggleElement = $(element);
-    // };
 
     handleToggleRef(element) {
         // eslint-disable-next-line
@@ -49,9 +38,6 @@ export class Toggle extends Component {
     };
 
     render() {
-        console.log("Toggle", this.props);
-
-        // console.log("Render");
 
         const { name, value } = this.props;
 

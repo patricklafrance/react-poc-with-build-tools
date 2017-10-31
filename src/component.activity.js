@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import SubsiteCreatedTemplate from "./component.subsite-created-template";
 import _ from "lodash";
 import o365GroupIcon from "./icon-o365group--circled.svg";
+import styles from "./app.scss";
 import subsitesIcon from "./icon-subsites--circled.svg";
 
 const ActivityTemplates = {
@@ -48,11 +49,11 @@ export class Activity extends PureComponent {
     render() {
         const { activity } = this.props;
         const Template = this._getTemplateComponent();
-        
+
         return (
-            <li className="activity-feed-item">
+            <li className={styles.activityFeedItem}>
                 <div>
-                    <img src={this._getIcon()} alt="Icon" className="activity-feed-item-icon" />
+                    <img src={this._getIcon()} alt="Icon" className={styles.activityFeedItemIcon} />
                 </div>
                 <div>
                     <div><Template activity={activity} /></div>

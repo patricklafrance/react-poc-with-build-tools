@@ -5,9 +5,10 @@ import AlertsConfiguration from "./page.alerts-configuration";
 import GithubRepositoriesPage from "./page.github-repositories";
 import { NotFound } from "./page.not-found";
 import React from "react";
+import styles from "./app.scss";
 
 const Main = () => (
-    <div className="main">
+    <div className={styles.main}>
         <Switch>
             <Redirect exact from="/" to="feed" />
             <Route exact path="/feed" component={ActivityFeed} />

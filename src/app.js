@@ -1,17 +1,16 @@
-import "./app.css";
-
 import Header from "./layout.header";
 import Main from "./layout.main";
 import React from "react";
 import Sidebar from "./layout.sidebar";
 import UnmanagedErrorNotification from "./unmanaged-error-notification";
+import styles from "./app.scss";
 
 const App = () => (
-  <div className="wrapper">
-    <div className="sidebar-column">
+  <div className={styles.wrapper}>
+    <div className={styles.sidebarColumn}>
       <Sidebar />
     </div>
-    <div className="main-column">
+    <div className={styles.mainColumn}>
       <Header />
       <Main />
       <UnmanagedErrorNotification />

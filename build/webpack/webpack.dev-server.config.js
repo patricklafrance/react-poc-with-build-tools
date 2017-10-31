@@ -1,6 +1,6 @@
 const path = require("path");
 const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
-const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
+// const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
 const { prepareUrls } = require("react-dev-utils/WebpackDevServerUtils");
 
 const { devServerConfig, paths } = require("../config");
@@ -67,7 +67,7 @@ module.exports = port => {
             // We do this in development to avoid hitting the production cache if
             // it used the same host and port.
             // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
-            app.use(noopServiceWorkerMiddleware());
+            // app.use(noopServiceWorkerMiddleware());
         }
     };
 };

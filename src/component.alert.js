@@ -10,6 +10,7 @@ import { Toggle } from "./component.toggle";
 import { bindActionCreators } from "redux";
 import classNames from "classnames";
 import { connect } from "react-redux";
+import styles from "./app.scss";
 
 class Alert extends PureComponent {
     static propTypes = {
@@ -37,7 +38,7 @@ class Alert extends PureComponent {
         console.log(this.props);
 
         return (
-            <li className={classNames({ "alert--is-active": alert.isSubscribed })}>
+            <li className={classNames({ [styles.alertIsActive]: alert.isSubscribed })}>
                 <h3>{alert.activityTypeId}</h3>
                 <span>{alert.recipientEmail}</span>
                 <Toggle value={alert.isSubscribed} onChanged={this.handleToggleChanged}  />

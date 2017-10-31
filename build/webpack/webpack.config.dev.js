@@ -19,6 +19,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
+
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
@@ -44,9 +45,8 @@ const outputRoot = path.resolve(paths.root, paths.outputRoot);
 
 /////////////////////////////////////
 
-module.exports = () => {
-    const test = {
-        entry: [
+module.exports = {
+    entry: [
             // React hot loader preserve the state of our components that use redux.
             require.resolve("react-hot-loader/patch"),
             // Include an alternative client for WebpackDevServer. A client's job is to
@@ -59,103 +59,109 @@ module.exports = () => {
             // initialization, it doesn't blow up the WebpackDevServer client, and
             // changing JS code would still trigger a refresh.
             appRoot
-        ],
-        output: {
-            path: outputRoot,
-            filename: "[name].bundle.js",
-            chunkFilename: "[name].chunk.js",
-            publicPath: publicPath,
-        },
-        resolve: {
-            extensions: [".js", ".json"],
-            modules: [appRoot, nodeRoot],
-            plugins: [
-                // Prevents users from importing files from outside of src/ (or node_modules/).
-                // This often causes confusion because we only process files within src/ with babel.
-                // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-                // please link the files into your node_modules/ and let module-resolution kick in.
-                // Make sure your source files are compiled, as they will not be processed in any way.
-                new ModuleScopePlugin(appRoot, [nodeRoot])
-            ]
-        },
-        devtool: "cheap-module-source-map",
-        module: {
-            strictExportPresence: true,
-            rules: [
-                {
-                    // "oneOf" will traverse all following loaders until one will
-                    // match the requirements. When no loader matches it will fall
-                    // back to the "file" loader at the end of the loader list.
-                    oneOf: [
-                        // Process JavaScript with Babel.
-                        {
-                            test: /\.js$/,
-                            include: appRoot,
-                            use: [
-                                require.resolve("react-hot-loader/webpack"),
-                                // NOTE: The HMR is not stable right now if we add caching for the cacheDirectory options for the babel-loader.
-                                require.resolve("babel-loader")
-                            ]
-                        },
-                        // "css" loader resolves paths in CSS and adds assets as dependencies.
-                        // "style" loader turns CSS into JS modules that inject <style> tags.
-                        {
-                            test: /\.css$/,
-                            use: [
-                                require.resolve("style-loader"),
-                                {
-                                    loader: require.resolve("css-loader"),
-                                    options: {
-                                        importLoaders: 1
-                                    }
-                                }
-                            ]
-                        },
-                        // "file" loader makes sure those assets get served by WebpackDevServer.
-                        // This loader doesn't use a "test" so it will catch all modules
-                        // that fall through the other loaders.
-                        {
-                            // Exclude `js` files to keep "css" loader working as it injects
-                            // it's runtime that would otherwise processed through "file" loader.
-                            // Also exclude `html` and `json` extensions so they get processed
-                            // by webpacks internal loaders.
-                            exclude: [/\.js$/, /\.html$/, /\.json$/],
-                            loader: require.resolve("file-loader"),
-                            options: {
-                                name: "assets/[name].[ext]"
-                            }
-                        },
-                    ]
-                }
-            ]
-        },
-        // TODO: new webpack.DefinePlugin(env.stringified),
+    ],
+    output: {
+        path: outputRoot,
+        filename: "[name].bundle.js",
+        chunkFilename: "[name].chunk.js",
+        publicPath: publicPath,
+    },
+    resolve: {
+        extensions: [".js", ".json"],
+        modules: [appRoot, nodeRoot],
         plugins: [
-            // Makes some environment variables available in index.html.
-            new InterpolateHtmlPlugin({
-                "PUBLIC_URL": publicUrl
-            }),
-            // Generates an `index.html` file with the <script> injected.
-            new HtmlWebpackPlugin({
-                inject: true,
-                template: appIndex,
-            }),
-            // Add module names to factory functions so they appear in browser profiler.
-            new webpack.NamedModulesPlugin(),
-            // This is necessary to emit hot updates.
-            new webpack.HotModuleReplacementPlugin(),
-            // Watcher doesn't work well if you mistype casing in a path so we use
-            // a plugin that prints an error when you attempt to do this.
-            new CaseSensitivePathsPlugin(),
-            // If you require a missing module and then `npm install` it, you still have
-            // to restart the development server for Webpack to discover it. This plugin
-            // makes the discovery automatic so you don't have to restart.
-            // See https://github.com/facebookincubator/create-react-app/issues/186
-            new WatchMissingNodeModulesPlugin(nodeRoot)
+            // Prevents users from importing files from outside of src/ (or node_modules/).
+            // This often causes confusion because we only process files within src/ with babel.
+            // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
+            // please link the files into your node_modules/ and let module-resolution kick in.
+            // Make sure your source files are compiled, as they will not be processed in any way.
+            new ModuleScopePlugin(appRoot, [nodeRoot])
         ]
-    };
-
-    console.log(JSON.stringify(test));
-
-    return test;
+    },
+    devtool: "cheap-module-source-map",
+    module: {
+        strictExportPresence: true,
+        rules: [
+            {
+                // "oneOf" will traverse all following loaders until one will
+                // match the requirements. When no loader matches it will fall
+                // back to the "file" loader at the end of the loader list.
+                oneOf: [
+                    // Process JavaScript with Babel.
+                    {
+                        test: /\.js$/,
+                        include: appRoot,
+                        use: [
+                            require.resolve("react-hot-loader/webpack"),
+                            // NOTE: The HMR is not stable right now if we add caching with the cacheDirectory options of the babel-loader.
+                            require.resolve("babel-loader")
+                        ]
+                    },
+                    {
+                        test: /\.scss$/,
+                        use: [
+                            {
+                                loader: "style-loader", // creates style nodes from JS strings
+                                options: {
+                                    sourceMap: true
+                                }
+                            },
+                            {
+                                loader: "css-loader", // translates CSS into CommonJS,
+                                options: {
+                                    modules: true,
+                                    importLoaders: 1,
+                                    localIdentName :"[path]___[name]__[local]___[hash:base64:5]"
+                                }
+                            },
+                            {
+                                loader: "resolve-url-loader" // Resolve asset URLs in CSS files
+                            },
+                            {
+                                loader: "sass-loader" // compiles Sass to CSS
+                            }
+                        ]
+                    },
+                    // "file" loader makes sure those assets get served by WebpackDevServer.
+                    // This loader doesn't use a "test" so it will catch all modules
+                    // that fall through the other loaders.
+                    {
+                        // Exclude `js` files to keep "css" loader working as it injects
+                        // it's runtime that would otherwise processed through "file" loader.
+                        // Also exclude `html` and `json` extensions so they get processed
+                        // by webpacks internal loaders.
+                        exclude: [/\.js$/, /\.html$/, /\.json$/],
+                        loader: require.resolve("file-loader"),
+                        options: {
+                            name: "assets/[name].[ext]"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    // TODO: new webpack.DefinePlugin(env.stringified),
+    plugins: [
+        // Makes some environment variables available in index.html.
+        new InterpolateHtmlPlugin({
+            "PUBLIC_URL": publicUrl
+        }),
+        // Generates an `index.html` file with the <script> injected.
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: appIndex,
+        }),
+        // Add module names to factory functions so they appear in browser profiler.
+        new webpack.NamedModulesPlugin(),
+        // This is necessary to emit hot updates.
+        new webpack.HotModuleReplacementPlugin(),
+        // Watcher doesn't work well if you mistype casing in a path so we use
+        // a plugin that prints an error when you attempt to do this.
+        new CaseSensitivePathsPlugin(),
+        // If you require a missing module and then `npm install` it, you still have
+        // to restart the development server for Webpack to discover it. This plugin
+        // makes the discovery automatic so you don't have to restart.
+        // See https://github.com/facebookincubator/create-react-app/issues/186
+        new WatchMissingNodeModulesPlugin(nodeRoot)
+    ]
 };

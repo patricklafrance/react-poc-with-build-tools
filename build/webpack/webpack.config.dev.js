@@ -1,20 +1,9 @@
 // TODO:
-// SASS
-// Semantic UI
 // Linters (ESLint, stylelint, jsx ally)
-// Babel
-// Images (+ optimization)
-// Text replacement in files
-// Copy assets
-
-// HMR (Missing for React code)
 // Tests
-// Compile semantic UI
 
 // NOTE: Good documentation about HMR setup: https://gaearon.github.io/react-hot-loader/getstarted/
-
 // Maybe solution for webpack + gulp for semantic: https://github.com/Browsersync/recipes/tree/master/recipes/webpack.react-hot-loader
-
 // TODO: Maybe we can avoid scripts/dev.js and webpack.dev-server.config.js and only configure webpack.config.dev.js.
 
 const path = require("path");
@@ -25,6 +14,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
+const autoprefixer = require("autoprefixer");
 
 const { paths, devServerConfig } = require("../config");
 
@@ -102,20 +92,33 @@ module.exports = {
                         test: /\.scss$/,
                         use: [
                             {
-                                // Turns CSS into JS modules injecting <style>,
+                                // Turns CSS into JS modules injecting <style>.
                                 loader: "style-loader",
                                 options: {
                                     sourceMap: true
                                 }
                             },
                             {
-                                // Translates CSS files into CommonJS that can be imported in component.
+                                // Resolves paths in CSS and adds assets as dependencies.
                                 loader: "css-loader",
                                 options: {
                                     modules: true,
                                     importLoaders: 1,
                                     localIdentName :"[path]___[name]__[local]",
                                     camelCase: "dashesOnly"
+                                }
+                            },
+                            {
+                                loader: require.resolve("postcss-loader"),
+                                options: {
+                                    // Necessary for external CSS imports to work
+                                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                                    ident: "postcss",
+                                    plugins: () => [
+                                        autoprefixer({
+                                            browsers: ["last 2 versions"]
+                                        })
+                                    ]
                                 }
                             },
                             {

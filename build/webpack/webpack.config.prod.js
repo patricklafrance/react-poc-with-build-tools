@@ -1,6 +1,4 @@
-// TODO: Minify CSS
 // TODO: Optimize images
-// TODO: Merge configs
 // TODO: Autoprefixer
 
 const path = require("path");
@@ -10,6 +8,7 @@ const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 
 const { paths, devServerConfig } = require("../config");
 
@@ -90,7 +89,6 @@ module.exports = {
                             fallback: require.resolve("style-loader"),
                             use: [
                                 {
-                                    // Resolves paths in CSS and adds assets as dependencies.
                                     loader: "css-loader",
                                     options: {
                                         modules: true,
@@ -101,39 +99,23 @@ module.exports = {
                                     }
                                 },
                                 {
-                                    // Compiles SASS to CSS.
+                                    loader: require.resolve("postcss-loader"),
+                                    options: {
+                                        // Necessary for external CSS imports to work
+                                        // https://github.com/facebookincubator/create-react-app/issues/2677
+                                        ident: "postcss",
+                                        plugins: () => [
+                                            autoprefixer({
+                                                browsers: ["last 2 versions"]
+                                            })
+                                        ]
+                                    }
+                                },
+                                {
                                     loader: "sass-loader"
                                 }
                             ]
                         })
-                        // loader: ExtractTextPlugin.extract(
-                        //     Object.assign({
-
-                        //     }, )
-                        //     {
-                        //         // Turns CSS into JS modules injecting <style>.
-                        //         loader: "style-loader",
-                        //         options: {
-                        //             sourceMap: true
-                        //         }
-                        //     },
-                        //     {
-                        //         // Resolves paths in CSS and adds assets as dependencies.
-                        //         loader: "css-loader",
-                        //         options: {
-                        //             modules: true,
-                        //             importLoaders: 1,
-                        //             localIdentName :"[path]___[name]__[local]",
-                        //             camelCase: "dashesOnly",
-                        //             minimize: true
-                        //         }
-                        //     },
-                        //     {
-                        //         // Compiles SASS to CSS.
-                        //         loader: "sass-loader"
-                        //     },
-                        //     {})
-                        // )
                     },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // This loader doesn't use a "test" so it will catch all modules

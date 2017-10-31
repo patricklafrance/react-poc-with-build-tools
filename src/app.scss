@@ -45,37 +45,6 @@ li, ul {
 }
 
 /*******************************
- Sidebar
-*******************************/
-.sidebar {
-    background-color: #40434f;
-    /* background-color: red; */
-    height: 100%;
-}
-.sidebar__logo {
-    width: 12.15em;
-    height: 3.29em;
-    margin: 1.43em 1.72em;
-}
-.sidebar-link {
-    display: block;
-    padding: 1.15em 1.15em 1.15em 2.29em;
-    font-size: 1.15em;
-    line-height: 1;
-    text-align: left;
-    color: #dadee6;
-    fill: #fff;
-    cursor: pointer;
-    text-decoration: none !important;
-}
-.sidebar-link--active {
-    padding-left: 2em;
-    border-left: 0.29em solid #f47321;
-    background-color: #2b2f3c;
-    text-decoration: none;
-}
-
-/*******************************
  Activity Feed
 *******************************/
 .activity-feed-item-icon {
@@ -86,7 +55,7 @@ li, ul {
 /*******************************
  Alerts
 *******************************/
-.alert--is-active {
+.alert-is-active {
     background-color: blue;
 }
 

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { UnmanagedErrorType } from "./types";
 import _ from "lodash";
 import { connect } from "react-redux";
+import styles from "app.scss";
 
 // TODO: si null, retourner false?
 
@@ -20,7 +21,7 @@ class UnmanagedErrorNotification extends PureComponent {
         }
 
         return (
-            <div className="unmanaged-error-notification">
+            <div className={styles["unmanaged-error-notification"]}>
                 {error.message}
             </div>
         );

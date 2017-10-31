@@ -9,3 +9,31 @@
     height: 3.29em;
     margin: 1.43em 1.72em;
 }
+
+.sidebar {
+    background-color: #40434f;
+    /* background-color: red; */
+    height: 100%;
+}
+.logo {
+    width: 12.15em;
+    height: 3.29em;
+    margin: 1.43em 1.72em;
+}
+.link {
+    display: block;
+    padding: 1.15em 1.15em 1.15em 2.29em;
+    font-size: 1.15em;
+    line-height: 1;
+    text-align: left;
+    color: #dadee6;
+    fill: #fff;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+.link-active {
+    padding-left: 2em;
+    border-left: 0.29em solid #f47321;
+    background-color: #2b2f3c;
+    text-decoration: none;
+}

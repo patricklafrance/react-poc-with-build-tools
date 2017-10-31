@@ -3,7 +3,7 @@ import styles from "./app.scss";
 
 const Header = () => (
     <div className={styles.header}>
-        Header
+        Header2
     </div>
 );
 

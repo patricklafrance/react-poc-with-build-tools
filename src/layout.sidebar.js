@@ -10,13 +10,13 @@ const Sidebar = () => (
         </div>
         <ul>
             <li className="sidebar__menu-item">
-                <NavLink to="/feed" className={styles.link} activeClassName={styles["link-active"]}>Activity Feed</NavLink>
+                <NavLink to="/feed" className={styles.link} activeClassName={styles.linkActive}>Activity Feed</NavLink>
             </li>
             <li className="sidebar__menu-item">
-                <NavLink to="/alerts" className={styles.link} activeClassName={styles["link-active"]}>Alerts</NavLink>
+                <NavLink to="/alerts" className={styles.link} activeClassName={styles.linkActive}>Alerts</NavLink>
             </li>
             <li className="sidebar__menu-item">
-                <NavLink to="/repositories" className={styles.link} activeClassName={styles["link-active"]}>Repositories</NavLink>
+                <NavLink to="/repositories" className={styles.link} activeClassName={styles.linkActive}>Repositories</NavLink>
             </li>
         </ul>
     </div>

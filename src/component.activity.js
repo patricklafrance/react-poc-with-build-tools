@@ -51,9 +51,9 @@ export class Activity extends PureComponent {
         const Template = this._getTemplateComponent();
 
         return (
-            <li className={styles["activity-feed-item"]}>
+            <li className={styles.activityFeedItem}>
                 <div>
-                    <img src={this._getIcon()} alt="Icon" className={styles["activity-feed-item-icon"]} />
+                    <img src={this._getIcon()} alt="Icon" className={styles.activityFeedItemIcon} />
                 </div>
                 <div>
                     <div><Template activity={activity} /></div>

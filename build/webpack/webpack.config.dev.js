@@ -111,12 +111,14 @@ module.exports = {
                                 options: {
                                     modules: true,
                                     importLoaders: 1,
-                                    localIdentName :"[path]___[name]__[local]"
+                                    localIdentName :"[path]___[name]__[local]",
+                                    camelCase: "dashesOnly"
+                                    // dashesOnly
                                 }
                             },
-                            {
-                                loader: "resolve-url-loader" // Resolve asset URLs in CSS files
-                            },
+                            // {
+                            //     loader: "resolve-url-loader" // Resolve asset URLs in CSS files
+                            // },
                             {
                                 loader: "sass-loader" // compiles Sass to CSS
                             }

@@ -36,7 +36,7 @@ class Alert extends PureComponent {
         const { alert } = this.props;
 
         return (
-            <li className={classNames({ [styles["alert-is-active"]]: alert.isSubscribed })}>
+            <li className={classNames({ [styles.alertIsActive]: alert.isSubscribed })}>
                 <h3>{alert.activityTypeId}</h3>
                 <span>{alert.recipientEmail}</span>
                 <Toggle value={alert.isSubscribed} onChanged={this.handleToggleChanged}  />

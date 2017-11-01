@@ -63,6 +63,8 @@
     "browser-sync-webpack-plugin": "1.2.0",
     "css-loader": "^0.28.4",
     "gulp": "github:gulpjs/gulp#4.0",
+    "image-webpack-loader": "3.4.2",
+    "imagemin-webpack-plugin": "1.5.2",
     "install": "0.10.1",
     "node-sass": "^4.5.3",
     "npm": "5.5.1",

@@ -141,14 +141,13 @@ module.exports = {
                         exclude: [/\.js$/, /\.html$/, /\.json$/],
                         loader: require.resolve("file-loader"),
                         options: {
-                            name: `${paths.staticFilesPath}/img/[name].[ext]`
+                            name: `${paths.staticFilesPath}/media/[name].[ext]`
                         }
                     }
                 ]
             }
         ]
     },
-    // TODO: new webpack.DefinePlugin(env.stringified),
     plugins: [
         // Makes some environment variables available in index.html.
         new InterpolateHtmlPlugin({

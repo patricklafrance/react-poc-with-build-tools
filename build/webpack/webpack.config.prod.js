@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require("autoprefixer");
+// const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
 const { paths, devServerConfig } = require("../config");
 
@@ -117,6 +118,23 @@ module.exports = {
                             ]
                         })
                     },
+                    {
+                        test: /\.(gif|png|jpe?g|svg)$/i,
+                        use: [
+                            {
+                                loader: require.resolve("file-loader"),
+                                options: {
+                                    name: `${paths.staticFilesPath}/img/[name].[ext]`
+                                }
+                            },
+                            {
+                                loader: require.resolve("image-webpack-loader"),
+                                options: {
+                                    svgoPlugins: false
+                                }
+                            }
+                        ]
+                    },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // This loader doesn't use a "test" so it will catch all modules
                     // that fall through the other loaders.
@@ -128,14 +146,13 @@ module.exports = {
                         exclude: [/\.js$/, /\.html$/, /\.json$/],
                         loader: require.resolve("file-loader"),
                         options: {
-                            name: `${paths.staticFilesPath}/img/[name].[ext]`
+                            name: `${paths.staticFilesPath}/media/[name].[ext]`
                         }
                     }
                 ]
             }
         ]
     },
-    // TODO: new webpack.DefinePlugin(env.stringified),
     plugins: [
         // Makes some environment variables available in index.html.
         new InterpolateHtmlPlugin({
@@ -167,6 +184,10 @@ module.exports = {
               "NODE_ENV": JSON.stringify("production")
             }
         }),
+        // new ImageminPlugin({
+        //     test: /\.(jpe?g|png|gif|svg)$/i,
+        //     svgoPlugins: [{ removeTitle: true }]
+        // }),
         // Minify the code.
         new webpack.optimize.UglifyJsPlugin({
             compress: {

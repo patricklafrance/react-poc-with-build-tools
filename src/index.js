@@ -5,6 +5,7 @@
 
 // NOTE: React HMR setup instructions: https://gaearon.github.io/react-hot-loader/getstarted/
 // NOTE: Setup Gulp + Webpack: https://medium.com/points-san-francisco/what-i-wish-i-knew-6-days-ago-9f27c6c6ba02
+// NOTE: Optimiza a React SPA: https://medium.com/front-end-hacking/performance-optimizing-a-react-single-page-app-a68985fa72cc
 
 // WHY REDUX?
 // - Developer experience

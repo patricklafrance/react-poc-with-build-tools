@@ -94,7 +94,7 @@ module.exports = {
                                     options: {
                                         modules: true,
                                         importLoaders: 1,
-                                        localIdentName :"[path]___[name]__[local]",
+                                        localIdentName: "[path]___[name]__[local]",
                                         camelCase: "dashesOnly",
                                         minimize: true
                                     }
@@ -124,13 +124,18 @@ module.exports = {
                             {
                                 loader: require.resolve("file-loader"),
                                 options: {
-                                    name: `${paths.staticFilesPath}/img/[name].[ext]`
+                                    name: `${paths.staticFilesPath}img/[name].[ext]`
                                 }
                             },
                             {
                                 loader: require.resolve("image-webpack-loader"),
                                 options: {
-                                    svgoPlugins: false
+                                    svgo: {
+                                        plugins: [
+                                            { removeTitle: false },
+                                            { inlineStyles: false }
+                                        ]
+                                    }
                                 }
                             }
                         ]
@@ -146,7 +151,7 @@ module.exports = {
                         exclude: [/\.js$/, /\.html$/, /\.json$/],
                         loader: require.resolve("file-loader"),
                         options: {
-                            name: `${paths.staticFilesPath}/media/[name].[ext]`
+                            name: `${paths.staticFilesPath}media/[name].[ext]`
                         }
                     }
                 ]
@@ -173,15 +178,15 @@ module.exports = {
                 minifyJS: true,
                 minifyCSS: true,
                 minifyURLs: true,
-              }
+            }
         }),
         // It is absolutely essential that NODE_ENV was set to production here.
         // Otherwise React will be compiled in the very slow development mode.
         new webpack.DefinePlugin({
             "ENV": JSON.stringify("production"),
             "DEBUG": false,
-            "process.env":{
-              "NODE_ENV": JSON.stringify("production")
+            "process.env": {
+                "NODE_ENV": JSON.stringify("production")
             }
         }),
         // new ImageminPlugin({
@@ -207,7 +212,7 @@ module.exports = {
         }),
         // Extract the CSS into a file.
         new ExtractTextPlugin({
-            filename: `${paths.staticFilesPath}/css/[name].css`,
+            filename: `${paths.staticFilesPath}css/[name].css`,
         })
     ]
 };

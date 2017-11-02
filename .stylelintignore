@@ -1,0 +1,5 @@
+node_modules*/**/*.css
+jspm_packages*/**/*.css
+semantic/**/*.css
+semantic/**/*.less
+public/**/*.css

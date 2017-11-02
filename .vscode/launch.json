@@ -9,6 +9,12 @@
             "request": "launch",
             "name": "Attach Node to File",
             "program": "${file}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug DEV",
+            "program": "${workspaceRoot}/build/scripts/dev.js"
         }
     ]
 }

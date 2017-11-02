@@ -4,6 +4,7 @@ import {
     fetchRepositoriesFailed,
     fetchRepositoriesRequest,
     fetchRepositoriesSucceeded,
+    fetchValuesSucceeded,
     hideUnmanagedErrors,
     showUnmanagedErrors
 } from "./actions";
@@ -38,16 +39,16 @@ const handleErrorsDecorator = next => {
 export function fetchAlerts() {
     return dispatch => {
         const httpService = new HttpService();
-        
+
         dispatch(fetchAlertsRequest());
-            
+
         const newAlerts = httpService.get({ url: "/alerts" }).map(x => {
             return {
                 ...x,
                 isSubscribed: false
             };
         })
-        
+
         dispatch(fetchAlertsSucceeded(newAlerts));
     };
 }
@@ -62,7 +63,7 @@ export function fetchRepositories() {
 
         if (!state.repositories.isLoading) {
             dispatch(fetchRepositoriesRequest());
-            
+
             try {
                 const data = await client.get({
                     url: "https://api.github.com/search/repositories",
@@ -70,7 +71,7 @@ export function fetchRepositories() {
                         q: "test"
                     }
                 });
-    
+
                 dispatch(fetchRepositoriesSucceeded(data.items));
             }
             catch (error) {
@@ -79,6 +80,21 @@ export function fetchRepositories() {
                 throw error;
             }
         }
+    });
+}
+
+/*******************************
+ Values
+*******************************/
+export function fetchValues() {
+    return handleErrorsDecorator(async (dispatch) => {
+        const client = new FetchClient();
+
+        const data = await client.get({
+            url: "/api/Values"
+        });
+
+        dispatch(fetchValuesSucceeded(data));
     });
 }
 

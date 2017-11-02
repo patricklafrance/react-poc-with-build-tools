@@ -1,18 +1,21 @@
-// Place your settings in this file to overwrite default and user settings.
 {
+    // Place your settings in this file to overwrite default and user settings.
     "editor.minimap.enabled": false,
     "javascript.validate.enable": false,
+    // Enable/disable default JavaScript formatter (For Prettier)
+    "javascript.format.enable": false,
     "html.suggest.angular1": false,
     "html.suggest.ionic": false,
-    "htmlhint.enable": false,
     "vsicons.presets.angular": false,
     "editor.wordWrap": "off",
-    "files.associations": {
-        "*.variables": "less",
-        "*.overrides": "less"
-    },
+    // Format a file on save. A formatter must be available, the file must not be auto-saved, and editor must not be shutting down.
+    "editor.formatOnSave": true,
     "search.exclude": {
         "**/node_modules*": true,
         "dist": true
-    }
+    },
+    // Use "prettier-eslint" instead of "prettier". Other settings will only be fallbacks in case they could not be inferred from eslint rules.
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": true,
+    "prettier.tabWidth": 4
 }

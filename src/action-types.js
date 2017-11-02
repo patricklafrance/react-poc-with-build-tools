@@ -28,7 +28,14 @@ export const FetchRepositoriesSucceeded = `${GithubRepositoriesNamespace}/FETCH_
 export const FetchRepositoriesFailed = `${GithubRepositoriesNamespace}/FETCH_REPOSITORIES_FAILED`;
 
 /*******************************
- Github repositories
+ Values
+*******************************/
+const ValuesNamespace = "VALUES";
+
+export const FetchValuesSucceeded = `${ValuesNamespace}/FETCH_VALUES_SUCCEEDED`;
+
+/*******************************
+ Notifications
 *******************************/
 const NotificationsNamespace = "NOTIFICATIONS";
 

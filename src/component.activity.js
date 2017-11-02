@@ -14,7 +14,8 @@ const ActivityTemplates = {
     2: O365GroupCreatedTemplate
 };
 
-const ActivityIcons = {1: subsitesIcon,
+const ActivityIcons = {
+    1: subsitesIcon,
     2: o365GroupIcon
 };
 

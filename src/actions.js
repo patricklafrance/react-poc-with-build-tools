@@ -84,6 +84,16 @@ export function fetchRepositoriesFailed(errorMessage) {
 }
 
 /*******************************
+ Values
+*******************************/
+export function fetchValuesSucceeded(values) {
+    return {
+        type: actionTypes.FetchValuesSucceeded,
+        values
+    };
+}
+
+/*******************************
  Notifications
 *******************************/
 export function showUnmanagedErrors(error) {

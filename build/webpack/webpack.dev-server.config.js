@@ -1,5 +1,6 @@
 const path = require("path");
-const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
+// const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
+const url = require("url");
 // const noopServiceWorkerMiddleware = require("react-dev-utils/noopServiceWorkerMiddleware");
 // const { prepareUrls } = require("react-dev-utils/WebpackDevServerUtils");
 
@@ -54,6 +55,17 @@ module.exports = port => {
         historyApiFallback: {
             // Paths with dots should still use the history fallback.
             disableDotRule: true
+        },
+        proxy: {
+            "/api/**": {
+              target: url.format({
+                  protocol: devServerConfig.https ? "https" : "http",
+                  hostname: devServerConfig.host,
+                  pathname: "/"
+              }),
+              secure: false,
+              changeOrigin: true,
+            }
         }
         // public: urls.lanUrlForConfig,
         // NOTE: setup is deprecated, it should be renamed to "before".

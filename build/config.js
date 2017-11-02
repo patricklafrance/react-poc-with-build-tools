@@ -26,10 +26,11 @@ const paths = {
 /////////////////////////////////////
 
 const devServerConfig = {
-    defaultPort: 3001,
-    host: "0.0.0.0",
-    https: false,
-    open: true,
+    port: 3000,
+    // host: "0.0.0.0",
+    host: "local.yeti.com",
+    https: true,
+    open: false,
     publicPath: "/"
 };
 

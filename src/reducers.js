@@ -150,6 +150,31 @@ const githubRepositoriesRootReducer = (state = GithubRepositoriesDefaultState, a
 };
 
 /*******************************
+ Values
+*******************************/
+
+const ValuesDefaultState = {
+    values: [],
+};
+
+const handleFetchValuesSucceeded = (state, action) => {
+    return {
+        ...state,
+        values: Array.from(action.values)
+    };
+};
+
+const valuesRootReducer = (state = ValuesDefaultState, action) => {
+    switch (action.type) {
+        case actionTypes.FetchValuesSucceeded:
+            return handleFetchValuesSucceeded(state, action);
+        default:
+            return state;
+    }
+};
+
+
+/*******************************
  Notifications
 *******************************/
 const NotificationsDefaultState = {
@@ -190,5 +215,6 @@ export default {
     feed: activityFeedRootReducer,
     alerts: alertsConfigurationRootReducer,
     repositories: githubRepositoriesRootReducer,
-    notifications: notificationsRootReducer
+    notifications: notificationsRootReducer,
+    values: valuesRootReducer
 };

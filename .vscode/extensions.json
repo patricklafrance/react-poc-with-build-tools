@@ -6,6 +6,6 @@
         "christian-kohler.path-intellisense",
         "shinnn.stylelint",
         "robertohuertasm.vscode-icons",
-        "peterjuras.sort-imports"
+        "amatiasq.sort-imports"
     ]
 }

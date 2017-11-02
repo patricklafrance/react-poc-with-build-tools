@@ -26,7 +26,7 @@ const url = require("url");
 /////////////////////////////////////
 
 function formatUrl(isHttps, host, port) {
-    const prettyHost = (host === "0.0.0.0" || host === "::") ? "localhost" : host;
+    const prettyHost = host === "0.0.0.0" || host === "::" ? "localhost" : host;
 
     return url.format({
         protocol: isHttps ? "https" : "http",
@@ -40,9 +40,11 @@ function formatUrl(isHttps, host, port) {
 
 choosePort(devServerConfig.host, devServerConfig.defaultPort)
     .then(port => {
-        if (port == null) {
+        /* eslint-disable */
+        if (port === null) {
             return;
         }
+        /* eslint-enable */
 
         // Retrieve the webpack dev server configuration with the chosen port.
         const serverConfig = createWebpackDevServerConfig(port);
@@ -70,7 +72,7 @@ choosePort(devServerConfig.host, devServerConfig.defaultPort)
         // SIGINT = Interrupt from keyboard
         // SIGTERM = Termination signal
         ["SIGINT", "SIGTERM"].forEach(signal => {
-            process.on(signal, function() {
+            process.on(signal, () => {
                 server.close();
                 process.exit();
             });

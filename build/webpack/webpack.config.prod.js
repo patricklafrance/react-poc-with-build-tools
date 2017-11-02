@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const autoprefixer = require("autoprefixer");
-// const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
 const { paths, devServerConfig } = require("../config");
 
@@ -40,7 +39,7 @@ module.exports = {
         path: outputRoot,
         filename: `${paths.staticFilesPath}js/[name].bundle.js`,
         chunkFilename: `${paths.staticFilesPath}js/[name].chunk.js`,
-        publicPath: publicPath,
+        publicPath
     },
     resolve: {
         extensions: [".js", ".json"],
@@ -177,7 +176,7 @@ module.exports = {
                 keepClosingSlash: true,
                 minifyJS: true,
                 minifyCSS: true,
-                minifyURLs: true,
+                minifyURLs: true
             }
         }),
         // It is absolutely essential that NODE_ENV was set to production here.
@@ -212,7 +211,7 @@ module.exports = {
         }),
         // Extract the CSS into a file.
         new ExtractTextPlugin({
-            filename: `${paths.staticFilesPath}css/[name].css`,
+            filename: `${paths.staticFilesPath}css/[name].css`
         })
     ]
 };

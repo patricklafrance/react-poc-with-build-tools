@@ -14,15 +14,14 @@ const ActivityTemplates = {
     2: O365GroupCreatedTemplate
 };
 
-const ActivityIcons = {
-    1: subsitesIcon,
+const ActivityIcons = {1: subsitesIcon,
     2: o365GroupIcon
 };
 
 export class Activity extends PureComponent {
     static propTypes = {
         activity: PropTypes.shape(ActivityType)
-    }
+    };
 
     _getTemplateComponent() {
         const { activity } = this.props;
@@ -53,14 +52,21 @@ export class Activity extends PureComponent {
         return (
             <li className={styles.activityFeedItem}>
                 <div>
-                    <img src={this._getIcon()} alt="Icon" className={styles.activityFeedItemIcon} />
+                    <img
+                        src={this._getIcon()}
+                        alt="Icon"
+                        className={styles.activityFeedItemIcon}
+                    />
                 </div>
                 <div>
-                    <div><Template activity={activity} /></div>
+                    <div>
+                        <Template activity={activity} />
+                    </div>
                     <div>{activity.timestamp}</div>
                 </div>
                 <hr />
-                <br /><br />
+                <br />
+                <br />
             </li>
         );
     }

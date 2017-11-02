@@ -4,15 +4,12 @@
     "javascript.validate.enable": false,
     "html.suggest.angular1": false,
     "html.suggest.ionic": false,
-    "htmlhint.enable": false,
     "vsicons.presets.angular": false,
     "editor.wordWrap": "off",
-    "files.associations": {
-        "*.variables": "less",
-        "*.overrides": "less"
-    },
     "search.exclude": {
         "**/node_modules*": true,
         "dist": true
-    }
+    },
+    // Use "prettier-eslint" instead of "prettier". Other settings will only be fallbacks in case they could not be inferred from eslint rules.
+    "prettier.eslintIntegration": true
 }

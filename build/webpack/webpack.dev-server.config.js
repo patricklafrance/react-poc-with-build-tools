@@ -8,10 +8,10 @@ const { devServerConfig, paths } = require("../config");
 
 /////////////////////////////////////
 
-module.exports = port => {
+module.exports = port =>
     // const urls = prepareUrls(devServerConfig.https ? "https" : "http" , devServerConfig.host, devServerConfig.port);
 
-    return {
+    ({
         // Enable gzip compression of generated files.
         compress: true,
         // Silence WebpackDevServer's own logs since they're generally not useful.
@@ -46,11 +46,11 @@ module.exports = port => {
         publicPath: devServerConfig.publicPath,
         // Reportedly, this avoids CPU overload on some systems.
         watchOptions: {
-            ignored: /node_modules/,
+            ignored: /node_modules/
         },
         https: devServerConfig.https,
         host: devServerConfig.host,
-        port: port,
+        port,
         overlay: false,
         historyApiFallback: {
             // Paths with dots should still use the history fallback.
@@ -58,13 +58,13 @@ module.exports = port => {
         },
         proxy: {
             "/api/**": {
-              target: url.format({
-                  protocol: devServerConfig.https ? "https" : "http",
-                  hostname: devServerConfig.host,
-                  pathname: "/"
-              }),
-              secure: false,
-              changeOrigin: true,
+                target: url.format({
+                    protocol: devServerConfig.https ? "https" : "http",
+                    hostname: devServerConfig.host,
+                    pathname: "/"
+                }),
+                secure: false,
+                changeOrigin: true
             }
         }
         // public: urls.lanUrlForConfig,
@@ -79,5 +79,5 @@ module.exports = port => {
         //     // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
         //     // app.use(noopServiceWorkerMiddleware());
         // }
-    };
-};
+    })
+;

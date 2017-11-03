@@ -80,7 +80,11 @@ buildApp()
     .then(() => {
         copyPublicFolder();
 
-        console.log(chalk.green("\nProduction bundled created successfully!\n"));
+        console.log(
+            chalk.green("\nProduction bundled created successfully!\n")
+        );
+
+        return new Promise();
     })
     .catch(() => {
         process.exit(1);
